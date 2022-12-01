@@ -1,0 +1,100 @@
+
+<header>
+  <div id="navContainer">
+    <div id="title">
+      PhotoBase
+    </div>
+    <nav id="menuContainer">
+
+      <div class="menuItemContainer">
+        <a href="/">
+          <div class="menuItem">
+            <img src="/images/icons/homeIcon.png" alt="Home Icon">
+          </div>
+        </a>
+        home
+      </div>
+
+      <% if(user) { %>
+        <div class="menuItemContainer">
+          <a href="/account">
+            <% if (user.profilePicture) { %>
+              <div class="menuItem" style="background: url('<%= user.profilePicture %>'); background-size: cover; background-position: center;">
+            <% } else { %>  
+              <div class="menuItem">
+                <img src="/images/icons/personIcon.png" alt="Person Icon">
+              <% } %> 
+            </div>
+          </a>
+          account
+        </div>
+
+        
+
+        <div class="menuItemContainer">
+          <a href="/gallery">
+            <div class="menuItem">
+              <img src="/images/icons/galleryIcon.png" alt="Gallery Icon">
+            </div>
+          </a>
+          gallery
+        </div>
+
+        <div class="menuItemContainer">
+          <div class="menuItem">
+            <a href="/search-photos">
+              <img src="/images/icons/searchIcon.png" alt="Search Icon">
+            </a>
+          </div>
+          search
+        </div>
+  
+        <div class="menuItemContainer">
+          <a href="/add-photo">
+            <div class="menuItem">
+              <img src="/images/icons/uploadIcon.png" alt="Upload Icon">
+            </div>
+          </a>
+          upload
+        </div>
+  
+        <div class="menuItemContainer">
+          <a href="/logout">
+            <div class="menuItem">
+              <img src="/images/icons/logoutIcon.png" alt="Logout Icon">
+            </div>
+          </a>
+          logout
+        </div>
+
+      <% }%> 
+        
+
+        <% if(!user) { %>
+          <div class="menuItemContainer">
+            <a href="/login">
+              <div class="menuItem">
+                <img src="/images/icons/personIcon.png" alt="Person Icon">
+              </div>
+            </a>
+            login
+          </div>
+
+          <div class="menuItemContainer">
+            <a href="/register">
+              <div class="menuItem">
+                <img src="/images/icons/registerIcon.png" alt="Register Icon">
+              </div>
+            </a>
+            register
+          </div>
+      <% } %>
+
+      
+
+
+
+    </nav>
+  </div>
+</header>
+  

@@ -1,0 +1,22 @@
+#button-container {
+    width: 60%;
+    padding: 30px;
+    margin: auto;
+  }
+
+#keyword-search {
+    display: none;
+    flex-direction: column;
+    padding: 2px;
+}
+
+#tag-search {
+    display: none;
+    flex-direction: column;
+    padding: 2px;
+}
+
+#tag-search, #keyword-search{
+    flex-direction: column;
+    padding: 2px;
+}

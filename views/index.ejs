@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <title>PhotoBase</title>
+
+    <link  rel="stylesheet" href="styles/main.css"/>
+    <link  rel="stylesheet" href="styles/dashboard.css"/>
+  </head>
+
+  <body>
+    <div class="container">
+      <%- include('common/header'); -%>
+
+      <main>
+          <div class="content">
+            <br />
+              
+            <% if(member) { %>
+
+              <% if(! member.photoCount > 0) { %>
+
+                <h1>Welcome, <%= member.user.name.first %></h1>
+
+                <h2>It looks like you're a new member!</h2>
+
+                <p>Head on over to the <a href="/add-photo">upload</a> page to get started.</p>
+                <p>And don't forget to set your profile picture on your <a href="/account">account</a> page.</p>
+
+                <br/>
+                
+                <h2>Guide to Photos</h2>
+
+                <div id="dashboard-container">
+                  <div id="instructions">
+                    <table>
+                      <tr>
+                        <th>Field Name</th>
+                        <th>Field Input</th>
+                      </tr>
+                      <tr>
+                        <td>Tags</td>
+                        <td>Think of this as your photo album. New tags can be added on your <a href="/account">account</a> page.</td>
+                      </tr>
+                      <tr>
+                        <td>Where</td>
+                        <td>This can be as specific or as vague as you like!</td>
+                      </tr>
+                      <tr>
+                        <td>When</td>
+                        <td>An exact date, a season and year, or just the year. It's up to you!</td>
+                      </tr>
+                      <tr>
+                        <td>Who</td>
+                        <td>Who's in the photo? If it's no one, you can always leave this field blank.</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              
+              <% } else { %>
+
+                <h1>Welcome back, <%= member.user.name.first %></h1>
+
+                <p>You have <%= member.photoCount %> photos on your account! </p>
+
+                <h3>Most Recent Photo</h3>
+
+                <div class="photo-outer-container">
+                  <div class="photo-inner-container">
+                    <div class="img-container" style="background: url('<%= member.newestPhoto.image_url %>'); background-size: cover; background-position: center;"></div>
+                    <div class="txt-container">
+                      <p><strong>tags:</strong><br/>
+                        <% member.newestPhoto.tags.forEach(tag => { %>
+                          <%= tag.name %>
+                        <% }) %>
+                        </p>
+                      <p>
+                          <strong>where:</strong> <%= member.newestPhoto.where %><br/>
+                          <strong>when:</strong> <%= member.newestPhoto.when %><br/>
+                          <% if (member.newestPhoto.who) { %>
+                              <strong>who:</strong> <%= member.newestPhoto.who %><br/>
+                          <% } %>
+                      </p>
+                      <br/>
+                      <a href="/display-photo/<%= member.newestPhoto._id %>" class="btn-secondary" target="_blank">See Photo</a>
+                      <a href="/gallery/edit/<%= member.newestPhoto._id %>" class="btn-secondary">Edit</a>
+                      <a href="/gallery/delete/<%= member.newestPhoto._id %>" class="btn-secondary">Delete</a>
+                    </div>
+                  </div>
+                </div>
+
+                <h3>Tags Dashboard</h3>
+
+                <p>See how many times each of your tags have been used!</p>
+
+                <div id="dashboard-container">
+                  <div id="dashboard">
+                    <table id="tags">
+                      <tr>
+                        <th>Tag Name</th>
+                        <th>Times Used</th>
+                      </tr>
+                      <% member.tagCountSummary.forEach(tag => { %>
+                        <tr id="tags">
+                          <td><%= tag.name %></td>
+                          <td><%= tag.total %></td>
+                        </tr>
+                      <% }) %>
+                    </table>
+                  </div>
+                </div>
+
+              <% } %>
+
+            <% } else { %>
+
+              <h2>Where your <i>photo</i>book + our data<i>base</i> = </h2>
+              <h1>PhotoBase</h1>
+
+              <h3>Fed up with having a phone full of photos but the where, when, or who are a little hazy?</h3>
+              <p>With PhotoBase, you can not only upload your photos, but your memories to go with them!</p>
+
+              
+
+              <div class="photo-outer-container">
+                <div class="photo-inner-container">
+                  <div class="img-container" style="background: url('/images/lake.jpg'); background-size: cover; background-position: center;">
+              
+                  </div>
+                  <div class="txt-container">
+                    <p><strong>tags:</strong><br/>#holidays #mothernature #britabroad</p>
+                    <p>
+                      <strong>where:</strong> Canada <br/>
+                      <strong>when:</strong> Summer 2015 <br/>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="photo-outer-container">
+                <div class="photo-inner-container">
+                  <div class="img-container" style="background: url('/images/friends.jpg'); background-size: cover; background-position: center;">
+                  </div>
+                  <div class="txt-container">
+                    <p><strong>tags:</strong><br/>#justusgals #mybirthday #friends</p>
+                    <p>
+                      <strong>where:</strong> Michelle's house <br/>
+                      <strong>when:</strong> 4th August 2019 <br/>
+                      <strong>who:</strong>  Me, Michelle, Emma
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="photo-outer-container">
+                <div class="photo-inner-container">
+                  <div class="img-container" style="background: url('/images/sunset.jpg'); background-size: cover; background-position: center;">
+                  </div>
+                  <div class="txt-container">
+                    <p><strong>tags:</strong><br/>#mothernature #holidays</p>
+                    <p>
+                      <strong>where:</strong> Greece <br/>
+                      <strong>when:</strong> June 2012 <br/>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="photo-outer-container">
+                <div class="photo-inner-container">
+                  <div class="img-container" style="background: url('/images/puppy.jpg'); background-size: cover; background-position: center;">
+                  </div>
+                  <div class="txt-container">
+                    <p><strong>tags:</strong><br/>#pets #family #babybertie</p>
+                    <p>
+                      <strong>where:</strong> Queen Elizabeth Country Park <br/>
+                      <strong>when:</strong> Autumn 2021 <br/>
+                      <strong>who:</strong>  Bertie, Tom
+                    </p>
+                  </div>
+                </div>
+              </div>
+            <% } %>
+          </div>
+      </main>
+      
+    </div>
+  </body>
+</html>

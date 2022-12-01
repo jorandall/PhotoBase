@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <title>PhotoBase</title>
+
+    <link  rel="stylesheet" href="/styles/main.css"/>
+  </head>
+
+  <body>
+    <div class="container">
+      <%- include('common/header'); -%>
+
+      <main>
+          <div class="content">
+            <h1>Join PhotoBase today!</h1>
+
+            <p>Enter your details below to start your PhotoBase journey.</p>
+
+            <div class="form-container">
+
+              <form method="POST" action="/register" id="frm-register">
+                  
+                  <div class="form-group">
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      name="firstName"
+                      placeholder="First Name"
+                    />
+                    <p class="error-txt-secondary" id="firstName-error"></p>
+                  </div>
+
+                <div class="form-group">
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    name="lastName"
+                    placeholder="Last Name"
+                  />
+                  <p class="error-txt-secondary" id="lastName-error"></p>
+                </div>
+
+                <div class="form-group">
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    placeholder="Email"
+                  />
+                  <p class="error-txt-secondary" id="email-error"></p>
+                </div>
+
+                  <div class="form-group">
+                    <input 
+                      type="password" 
+                      class="form-control" 
+                      name="password"
+                      placeholder="Password"
+                    />
+                    <p class="error-txt-secondary" id="password-error"></p>
+                  </div>
+
+                  <button type="submit" class="btn-primary">Submit</button>
+                </form> 
+                
+                <% if (errors) { %>
+                  <p class="error-txt-primary"><%= errors.message %></p>
+                <% } %>
+              
+            </div>
+
+            <p>Already a member? Click <a href="/login">here</a> to login.</p>
+          
+          </div>
+
+        </main>
+    </div>
+    <script src="/scripts/form-validation-register.js"> </script>  
+  </body>
+</html>

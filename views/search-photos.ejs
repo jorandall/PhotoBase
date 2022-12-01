@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <title>PhotoBase</title>
+
+    <link  rel="stylesheet" href="/styles/main.css"/>
+    <link  rel="stylesheet" href="/styles/search-photos.css"/>
+  </head>
+
+  <body>
+    <div class="container">
+      <%- include('common/header'); -%>
+
+      <main>
+        <div class="content">
+          <h1>Search Photos</h1>
+
+          <p>Find the photo you were thinking of.</p>
+          <p>
+            Either click Keyword Search to type in the where, when, or who you are looking for,<br/>
+            or click Tag Search to find the photos with that tag.
+          </p>
+
+          <div id="button-container">
+            <button class="btn-tertiary" onclick="onClick('keyword')">Keyword Search</button>
+            <button class="btn-tertiary" onclick="onClick('tag')">Tag Search</button>
+          </div>
+          
+          <div class="form-container">
+            <form  id="keyword-search">
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Type any text"
+                    id="keyword"
+                />
+                <br/>  
+
+                <div class="input-group-append">
+                    <button onclick="handleSubmit('keyword')" class="btn-primary" type="button">Search</button>
+                </div>
+
+            </form>
+
+            <form id="tag-search">
+              <select
+                  class="form-control"
+                  id="tag"
+              >
+              <% tags.forEach(tag => { %>
+                <option value="<%= tag._id %>"><%= tag.name %></option>
+              <% }); %>
+              </select>
+              <br/>  
+
+              <div class="input-group-append">
+                  <button onclick="handleSubmit('tag')" class="btn-primary" type="button">Search</button>
+              </div>
+              
+            </form> 
+          </div>
+            
+          <p id="message"></p>
+
+          <div id="photoItems"></div>
+        
+        </div>
+          
+
+        </div>
+      </main>
+    <script src="scripts/search-photos.js"></script>
+    <script src="scripts/search-photos-api.js"></script>
+  </body>
+</html>

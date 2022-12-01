@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <title>PhotoBase</title>
+
+    <link  rel="stylesheet" href="/styles/main.css"/>
+    <link  rel="stylesheet" href="/styles/dropdown-list.css"/>
+  </head>
+
+  <body>
+    <div class="container">
+      <%- include('common/header'); -%>
+
+      <main>
+        <% if (message) { %>
+          <div class="popup" id="popup" style="display: flex">
+            <div class="popup-txt">
+              <%= message %>
+            </div>
+            <button class="btn-secondary" id="btn-close">Close</button>
+          </div>
+        <% } %>
+
+        <div class="content">
+          <h1>Upload a Photo</h1>
+
+          <p>Here you can not only add a photo, but the memories to go with it.</p>
+
+          <div class="form-container" >
+
+            <form id="photo-form" method="POST" action="/add-photo" enctype="multipart/form-data">
+                
+              <div class="form-group">
+                <input 
+                  type="file" 
+                  class="form-control" 
+                  name="image"
+                  id="image"
+                />
+                <p class="error-txt-secondary" id="image-error"></p>
+              </div>
+            
+              <div class="form-group">
+                <div id="Multiselect" class="multiselect">
+                  <div id="SelectLabel" class="selectBox" onclick="toggleCheckboxArea()">
+                    <select class="form-select" id="selectbox" placeholder="Tags">
+                      <option></option>
+                    </select>
+                    <div class="overSelect"></div>
+                  </div>
+              
+                  <div id="dropdown">
+                    <% tags.forEach( tag => { %>
+                      
+                      <label for="<%= tag.name %>">
+                        <input 
+                          type="checkbox"           
+                          onchange="checkboxStatusChange()" 
+                          id="<%= tag.name %>"
+                          name="tags" 
+                          value="<%= tag._id %>">
+                          </input>
+                        <%= tag.name %>
+                      </label>
+                    <% }) %>
+                  </div>
+                </div>
+                <p class="error-txt-secondary" id="tags-error"></p>
+              </div>            
+
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="where"
+                  placeholder="Where"
+                />
+                <p class="error-txt-secondary" id="where-error"></p>
+              </div>
+            
+              <div class="form-group">
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  name="when"
+                  placeholder="When"
+                />
+                <p class="error-txt-secondary" id="when-error"></p>
+              </div>
+            
+              <div class="form-group">
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  name="who"
+                  placeholder="Who"
+                />
+              </div>
+            
+              <br/>
+              <button type="submit" class="btn-primary">Submit</button>
+  
+            </form> 
+
+            <% if (errors) { %>
+              <p class="error-txt-primary"><%= errors.message %></p>
+            <% } %>
+
+            <p>Can't find the tag you're looking for? Click <a href="/account">here</a> to add a new one.</p>
+
+          </div>
+          
+        </div>
+      </main>
+      <script src="/scripts/form-validation-photo.js"></script>
+      <script src="/scripts/tags-dropdown.js"></script>
+      <script src="/scripts/notification-popup.js"> </script> 
+  </body>
+</html>

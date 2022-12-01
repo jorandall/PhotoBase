@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <title>PhotoBase</title>
+
+    <link  rel="stylesheet" href="/styles/main.css"/>
+  </head>
+
+  <body>
+    <div class="container">
+      <%- include('common/header'); -%>
+
+      <main>
+        <% if (message) { %>
+          <div class="popup" id="popup" style="display: flex">
+            <div class="popup-txt">
+              <%= message %>
+            </div>
+            <button class="btn-secondary" id="btn-close">Close</button>
+          </div>
+        <% } %>
+
+        <div class="content">
+          <% if(user) { %>
+            <h1><%= user.name.first %> <%= user.name.last %>'s Account</h1>
+
+            
+            <section id="profile-picture-section">
+              <% if(user.profilePicture) { %>
+
+                <h3>Profile Picture</h3>
+
+                <div class="photo-outer-container">
+                  <div id="profile-photo-display-container">
+                    <div class="photo-display" style="background: url('<%= user.profilePicture %>'); background-size: cover; background-position: center;"></div> 
+                  </div>
+                </div>
+
+                <h3>Update Profile Picture</h3>
+
+              <% } else { %>
+
+                <h3>Add Profile Picture</h3>
+
+              <% } %>
+
+              <div class="form-container" >
+                <form method="POST" id="frm-picture" action="/account/profilePicture" enctype="multipart/form-data">
+                    
+                  <div class="form-group">
+                    <input 
+                      type="file" 
+                      class="form-control" 
+                      name="image"
+                    />
+                    <p class="error-txt-secondary" id="image-error"></p>
+                  </div>
+
+                  <button type="submit" class="btn-primary">Submit</button>
+    
+                </form> 
+              </div>
+            </section>
+
+            <br/> 
+
+            <section id="update-password-section">
+      
+              <h3>Update Password</h3>
+
+              <div class="form-container">
+
+                <form method="POST" action="/account/updatePassword" id="frm-account">
+                        
+                    <div class="form-group">
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="oldPassword"
+                          name="oldPassword"
+                          placeholder="Current Password"
+                        />
+                        <p class="error-txt-secondary" id="oldPassword-error"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="newPassword"
+                          name="newPassword"
+                          placeholder="New Password"
+                        />
+                        <p class="error-txt-secondary" id="newPassword-error"></p>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Submit</button>
+
+                </form>
+
+                <% if (errors["password"]) { %>
+                  <p class="error-txt-primary"><%= errors["password"].message %></p>
+                <% } %>
+
+              </div>
+            </section>
+
+            <br/>
+
+            <section id="add-tag-section">
+      
+              <h3>Add Tag</h3>
+
+              <div class="form-container">
+
+                <form method="POST" action="/add-tag" id="frm-tag">
+                        
+                    <div class="form-group">
+                        <input
+                          type="name"
+                          class="form-control"
+                          id="name"
+                          name="name"
+                          placeholder="Tag Name"
+                        />
+                        <p class="error-txt-secondary" id="tag-error"></p>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Submit</button>
+
+                </form>
+
+                <% if (errors["tag"]) { %>
+                  <p class="error-txt-primary"><%= errors["tag"].message %></p>
+                <% } %>
+
+              </div>
+            </section>
+                      
+
+          <% }%>
+        </div>
+      </main>
+    </div>
+    <script src="/scripts/form-validation-account.js"> </script> 
+    <script src="/scripts/notification-popup.js"> </script> 
+  </body>
+</html>

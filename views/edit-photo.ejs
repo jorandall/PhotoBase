@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <title>PhotoBase</title>
+
+    <link  rel="stylesheet" href="/styles/main.css"/>
+    <link  rel="stylesheet" href="/styles/dropdown-list.css"/>
+  </head>
+
+  <body>
+    <div class="container">
+      <%- include('common/header'); -%>
+
+      <main>
+          <div class="content">
+            <h1>Edit a Photo</h1>
+
+            <div class="photo-outer-container">
+              <div class="photo-display-container">
+                <a href="/display-photo/<%= photo._id %>" target="_blank">
+                  <div class="photo-display" style="background: url('<%= photo.image_url %>'); background-size: cover; background-position: center;"></div>
+                </a>
+              </div>
+            </div>
+
+            <div class="form-container">
+
+              <form method="POST" id="photo-form">
+                           
+                <div class="form-group">
+                  <div id="Multiselect" class="multiselect">
+                    <div id="SelectLabel" class="selectBox" onclick="toggleCheckboxArea()">
+                      <select class="form-select" id="selectbox" placeholder="Tags">
+                        <option></option>
+                      </select>
+                      <div class="overSelect"></div>
+                    </div>
+                
+                    <div id="dropdown">
+                      <% tags.forEach( tag => { %>
+                        
+                        <label for="<%= tag.name %>">
+                          <input 
+                            type="checkbox"
+                            <% if (photo.tags.includes(tag._id)) {%>   checked <% } %> 
+                            onchange="checkboxStatusChange()" 
+                            id="<%= tag.name %>"
+                            name="tags" 
+                            value="<%= tag._id %>">
+                            </input>
+                          <%= tag.name %>
+                        </label>
+                      <% }) %>
+                    </div>
+                  </div>
+                  <p class="error-txt-secondary" id="tags-error"></p>
+                </div>                
+
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="where"
+                    value="<%= photo.where %>"
+                    placeholder="Where"
+                  />
+                  <p class="error-txt-secondary" id="where-error"></p>
+                </div>
+              
+                <div class="form-group">
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    name="when"
+                    value="<%= photo.when %>"
+                    placeholder="When"
+                  />
+                  <p class="error-txt-secondary" id="when-error"></p>
+                </div>
+              
+                <div class="form-group">
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    name="who"
+                    value="<%= photo.who %>"
+                    placeholder="Who"
+                  />
+                </div>
+              
+                <br/>
+                <button type="submit" class="btn-primary">Submit</button>
+                  
+              </form>
+              
+              <br/>
+              <button type="button" class="btn-primary" onClick="history.back()">Back</button>
+              
+            </div>
+
+          </div>
+
+      </main>
+    </div>
+
+    <script src="/scripts/form-validation-photo.js"></script>
+    <script src="/scripts/tags-dropdown.js"></script>
+    
+  </body>
+</html>

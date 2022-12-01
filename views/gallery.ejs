@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <title>PhotoBase</title>
+
+    <link  rel="stylesheet" href="/styles/main.css"/>
+  </head>
+
+  <body>
+    <div class="container">
+      <%- include('common/header'); -%>
+
+      <main>
+          <div class="content">
+            <br />
+            <h1>Gallery</h1>
+
+            <% if (errors) { %>
+              <p class="error-txt-primary"><%= errors.message %></p>
+            <% } %>
+
+            <% if (message) { %>
+              <div class="popup" id="popup" style="display: flex">
+                <div class="popup-txt">
+                  <%= message %>
+                </div>
+                <button class="btn-secondary" id="btn-close">Close</button>
+              </div>
+            <% } %>
+            
+            <% if (photos) { %>
+              
+            
+            <div>
+                <% photos.forEach(photo => { %>
+                  <div class="photo-outer-container">
+                    <div class="photo-inner-container">
+                      <div class="img-container" style="background: url('<%= photo.image_url %>'); background-size: cover; background-position: center;"></div>
+                      <div class="txt-container">
+                        <p><strong>tags:</strong><br/>
+                          <% photo.tags.forEach(tag => { %>
+                            <%= tag.name %>
+                          <% }) %>
+                          </p>
+                        <p>
+                            <strong>where:</strong> <%= photo.where %><br/>
+                            <strong>when:</strong> <%= photo.when %><br/>
+                            <% if (photo.who) { %>
+                                <strong>who:</strong> <%= photo.who %><br/>
+                            <% } %>
+                        </p>
+                        <br/>
+                        <a href="/display-photo/<%= photo._id %>" class="btn-secondary" target="_blank">See Photo</a>
+                        <a href="/gallery/edit/<%= photo._id %>" class="btn-secondary">Edit</a>
+                        <a href="/gallery/delete/<%= photo._id %>" class="btn-secondary">Delete</a>
+                      </div>
+                    </div>
+                  </div>
+                  <%})%>
+
+            </div>
+
+            <% if (numberOfPages > 1) { %>
+              <div class="pagination-container">
+                <nav class="pagination">
+                    <% if (currentPage === 1) { %>
+                      <a class="page-link" href="#">First</a>      
+                    <% } %>  
+
+                    <% if (currentPage > 1) { %>
+                        <a class="page-link" href="/gallery">First</a> 
+                    <% } %>  
+
+                    <% for(let page = 2; page < numberOfPages; page++) { %>
+                      <a class="page-link" href="/gallery?page=<%= currentPage = page %>"><%= page %></a> 
+                    <% } %>   
+                      
+                    <% if (currentPage === numberOfPages) { %>
+                      <a class="page-link" href="">Last</a>
+                    <% } %>  
+                    
+                    <% if (currentPage < numberOfPages) { %>
+                        <a class="page-link" href="/gallery?page=<%= numberOfPages %>">Last</a>
+                    <% } %>  
+                </nav>
+            </div>
+          <% } %> 
+
+          <p><strong>Number of pages: </strong> <%= numberOfPages %></p>
+          
+          <% } %>
+        </div>
+
+      </main>
+    </div>
+    <script src="/scripts/notification-popup.js"> </script> 
+  </body>
+</html>

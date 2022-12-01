@@ -1,0 +1,39 @@
+#dashboard-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#dashboard, #instructions {
+    margin: auto;
+    text-align: left;
+}
+
+#dashboard {
+    width: 40%;
+}
+
+#instructions {
+    width: 55%;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 10px;
+}
+
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #188C9C;
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+#tags tr:nth-child(even){background-color: white;}
